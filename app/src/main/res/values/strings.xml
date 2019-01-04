@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Ustapp3</string>
+    <string name="app_title_prefix">usta</string>
+    <string name="app_title_suffix">pp</string>
+
+    <!-- navigation drawer items -->
+    <string name="nav_reg">Registration</string>
+    <string name="nav_about">About us</string>
+
+    <!-- target activity strings -->
+    <string name="targetText">Meqsediniz?</string>
+    <string name="targetButtonReg">Registrasiya</string>
+    <string name="targetButtonPrimaryScreen">Bashlangich ekran</string>
+    <string name="title_activity_sign_in_up">SignInUpActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Sign in activity content -->
+    <string name="etHintEmail">Email</string>
+    <string name="etHintPassword">Password</string>
+    <string name="btSignIn">Sign in</string>
+
+    <!-- Sign up activity content -->
+    <string name="etHintFullName">Full name</string>
+    <string name="etHintPhone">Phone number</string>
+    <string name="etHintEmailSignUp">Your email</string>
+    <string name="etHintPassSignUp">Your password</string>
+    <string name="etHintPassConfirmSignUp">Confirm password</string>
+    <string name="etHintCategorySignUp">Category</string>
+    <string name="btSignUp">Continue</string>
+    <string name="btAfterPayment">Sign up</string>
+
+    <!-- error text -->
+    <string name="fullNameErr">Enter valid full name</string>
+    <string name="emailErr">Enter valid email address</string>
+    <string name="phoneNumErr">Enter valid phone number</string>
+    <string name="passwordErr">Password must be at least 6 characters</string>
+    <string name="passwordConfirmErr">Password and password confirm must be equals</string>
+    <string name="categoryMasterImageDesc">Photo</string>
+
+
+</resources>

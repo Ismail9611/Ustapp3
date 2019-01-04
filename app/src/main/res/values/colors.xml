@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#158dc4</color>
+    <color name="colorPrimaryDark">#C41515</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="splashBackground">#C41515</color>
+    <color name="app_title_text_prefix">#FFFFFF</color>
+    <color name="app_title_text_suffix">#FFFFFF</color>
+    <color name="targetText">#FFFFFF</color>
+    <color name="tabColor">#FF9B85</color>
+    <color name="search_background">#e2340e</color>
+    <color name="card_view">#10a8f2</color>
+</resources>

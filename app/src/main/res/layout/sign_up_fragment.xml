@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_up_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/targetText">
+
+
+    <ImageButton
+        android:id="@+id/ibAvatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:background="@color/targetText"
+        android:tintMode="screen"
+        android:contentDescription="Choose your photo"
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:scaleType="fitCenter"/>
+
+
+    <EditText
+        android:id="@+id/etSignUpFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etHintFullName"
+        android:inputType="text"
+        android:maxLength="40" />
+
+
+    <EditText
+        android:id="@+id/etSignUpPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etHintPhone"
+        android:inputType="number"
+        android:maxLength="20" />
+
+
+    <EditText
+        android:id="@+id/etSignUpEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etHintEmailSignUp"
+        android:inputType="textEmailAddress"
+        android:maxLength="40" />
+
+
+    <EditText
+        android:id="@+id/etSignUpPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etHintPassSignUp"
+        android:inputType="textPassword"
+        android:maxLength="20" />
+
+
+    <EditText
+        android:id="@+id/etSignUpPassConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/etHintPassConfirmSignUp"
+        android:inputType="textPassword"
+        android:maxLength="20" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="@string/btSignUp" />
+
+</LinearLayout>
