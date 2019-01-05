@@ -1,6 +1,8 @@
 package org.ginlevel.ustapp3.storing;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -215,6 +219,43 @@ public class FirebaseDB {
 
         });
         categoryListView.setAdapter(categoryAdapter);
+    }
+
+    public void loadAllCategoriesToDialog(final Context context, final Button btnCategory){
+        final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context, android.R.layout.select_dialog_singlechoice);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.select_dialog_item);
+        alertBuilder.setTitle("Select category");
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        databaseReference.child(categoriesCollectionName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    Category category = ds.getValue(Category.class);
+                    arrayAdapter.add(category.getName());
+                }
+                arrayAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "loadAllCategoryToDialog error: " + databaseError.getDetails());
+            }
+
+        });
+
+        alertBuilder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String strName = arrayAdapter.getItem(which);
+                btnCategory.setText(strName);
+            }
+        });
+        alertBuilder.show();
     }
 
 

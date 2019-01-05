@@ -1,5 +1,7 @@
 package org.ginlevel.ustapp3.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.ginlevel.ustapp3.R;
 import org.ginlevel.ustapp3.activity.AccountActivity;
+import org.ginlevel.ustapp3.activity.CategoryActivity;
 import org.ginlevel.ustapp3.activity.MainActivity;
 import org.ginlevel.ustapp3.activity.PaymentActivity;
 import org.ginlevel.ustapp3.model.User;
@@ -34,9 +38,12 @@ import static android.app.Activity.RESULT_OK;
 
 public class SignUpFragment extends Fragment {
 
+    private static final int CATEGORY_SELECTED = 1;
+
+
     private View view;
     private EditText etSignUpEmail, etSignUpPass, etSignUpPassConfirm, etSignUpFullName, etSignUpPhoneNumber;
-    private Button btnSignUp;
+    private Button btnSignUp, btnSignUpCategory;
     private FirebaseAuth firebaseAuth;
     private ImageButton ibAvatar;
     private Uri avaUri;
@@ -66,6 +73,13 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        btnSignUpCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseDB.loadAllCategoriesToDialog(view.getContext(), btnSignUpCategory);
+            }
+        });
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,17 +88,18 @@ public class SignUpFragment extends Fragment {
                 String phoneNum = etSignUpPhoneNumber.getText().toString();
                 String password = etSignUpPass.getText().toString();
                 String passConfirm = etSignUpPassConfirm.getText().toString();
-                String category = "Empty..";
+                String category = btnSignUpCategory.getText().toString();
                 String description = "Empty..";
 
-                User user = new User(fullName, email, phoneNum);
-                user.setCategoryIn(category);
-                user.setJobDescription(description);
+                boolean validate = AdditionalFunc.signUpFieldsValidate(fullName, email, phoneNum, password, passConfirm, category, view);
 
-                boolean validate = AdditionalFunc.signUpFieldsValidate(fullName, email, phoneNum, password, passConfirm, view);
                 if (validate) {
+                    User user = new User(fullName, email, phoneNum);
+                    user.setCategoryIn(category);
+                    user.setJobDescription(description);
+
                     if (isPayed) {
-                        if (firebaseAuth.getCurrentUser() != null){
+                        if (firebaseAuth.getCurrentUser() != null) {
                             firebaseAuth.signOut();
                         }
                         signUpAndSave(view, user, password);
@@ -99,7 +114,6 @@ public class SignUpFragment extends Fragment {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -109,6 +123,9 @@ public class SignUpFragment extends Fragment {
                 Glide.with(view.getContext()).load(avaUri)
                         .apply(RequestOptions.circleCropTransform())
                         .into(ibAvatar);
+            }
+            if (requestCode == CATEGORY_SELECTED) {
+                btnSignUpCategory.setText(data.getCharSequenceExtra("category"));
             }
             if (data.getBooleanExtra("payment_done", false)) {
                 isPayed = true;
@@ -134,7 +151,7 @@ public class SignUpFragment extends Fragment {
         });
     }
 
-    private void emailVerification(FirebaseUser user){
+    private void emailVerification(FirebaseUser user) {
         if (user != null) {
             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -153,6 +170,7 @@ public class SignUpFragment extends Fragment {
         etSignUpEmail = view.findViewById(R.id.etSignUpEmail);
         etSignUpPass = view.findViewById(R.id.etSignUpPass);
         etSignUpPassConfirm = view.findViewById(R.id.etSignUpPassConfirm);
+        btnSignUpCategory = view.findViewById(R.id.btnSignUpCategory);
         btnSignUp = view.findViewById(R.id.btnSignUp);
     }
 

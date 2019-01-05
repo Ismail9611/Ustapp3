@@ -51,8 +51,6 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-
-
     private void loadAndShowCategories() {
         boolean connected = AdditionalFunc.isInternetConnected(this);
         if (connected) {

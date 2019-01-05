@@ -23,7 +23,7 @@ public class AdditionalFunc {
     }
 
     public static boolean signUpFieldsValidate(String fullName, String email, String phoneNum,
-                                               String password, String passConfirm, View view){
+                                               String password, String passConfirm, String category, View view){
         if (fullName.length() < 5){
             toastMessage(R.string.fullNameErr, view);
             return false;
@@ -42,6 +42,10 @@ public class AdditionalFunc {
         }
         if (!password.equals(passConfirm)){
             toastMessage(R.string.passwordConfirmErr, view);
+            return false;
+        }
+        if (category.equals("Select category")){
+            toastMessage(R.string.categoryErr, view);
             return false;
         }
         return true;

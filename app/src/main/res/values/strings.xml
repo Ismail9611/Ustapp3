@@ -36,6 +36,8 @@
     <string name="phoneNumErr">Enter valid phone number</string>
     <string name="passwordErr">Password must be at least 6 characters</string>
     <string name="passwordConfirmErr">Password and password confirm must be equals</string>
+    <string name="categoryErr">Please select category</string>
+
     <string name="categoryMasterImageDesc">Photo</string>
 
 
